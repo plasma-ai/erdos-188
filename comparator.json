@@ -1,0 +1,6 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": ["Erdos188.lower_bound", "Erdos188.upper_bound"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

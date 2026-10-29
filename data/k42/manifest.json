@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "kind": "periodic-disk-raw-assets-v1",
+  "purpose": "Exact finite inputs of the 42-term construction, compiled from the carrier and plug orbit tables and the tree witness named under source",
+  "manifest_role": "documentary_asset_identity_and_provenance_only",
+  "source": {
+    "producer": "scripts/construction/main.py",
+    "carrier_orbits": {
+      "path": "carrier_orbits.tsv",
+      "rows": 3240
+    },
+    "plug_orbits": {
+      "path": "plug_orbits.tsv",
+      "rows": 1844
+    },
+    "carriers_sha256": "8f3e5195055f7270ae1ea4bfa9ccf6dbad580f3519bd134367b6bfae5ee94efd",
+    "plugs_sha256": "ff7d237f892bfa4b2b805836ff2e3f7367d3cfbcc41dae66284a8b22d6eff249",
+    "tree_witness": {
+      "sha256": "0b75b2c23cece10f3eef95d00b92c648bf3a2f0455a95e2e364e1d70386173f0",
+      "bytes": 41195486,
+      "records": 411033,
+      "regenerated_by": [
+        "main.py --search over carrier_orbits.tsv and plug_orbits.tsv",
+        "main.py --compact over cover_tree.cert and cover_sites.tsv, bound to the carriers and plugs expanded from carrier_orbits.tsv and plug_orbits.tsv"
+      ]
+    }
+  },
+  "intended_conventions": {
+    "scale": [
+      21,
+      100
+    ],
+    "period": 59,
+    "target_points": 42,
+    "center_coordinates": "rational_axial",
+    "radius_units": "physical_Euclidean",
+    "disk_boundary": "closed",
+    "site_field_order": [
+      "s",
+      "t",
+      "r"
+    ],
+    "certificate_ordinal_base": 0,
+    "role_source": "this_explicit_manifest_not_certificate_header_labels"
+  },
+  "payload_bytes": 22707896,
+  "files": {
+    "base": {
+      "path": "base.tsv",
+      "semantic_role": "B",
+      "bytes": 3934547,
+      "sha256": "7a8231e89a49e6362114a1972b96b5580d3e56f5da21f23f2e10e54f894f5f9e"
+    },
+    "carriers": {
+      "path": "carriers.tsv",
+      "semantic_role": "full_S",
+      "bytes": 2648567,
+      "sha256": "8f3e5195055f7270ae1ea4bfa9ccf6dbad580f3519bd134367b6bfae5ee94efd"
+    },
+    "plugs": {
+      "path": "plugs.tsv",
+      "semantic_role": "P",
+      "bytes": 1289786,
+      "sha256": "ff7d237f892bfa4b2b805836ff2e3f7367d3cfbcc41dae66284a8b22d6eff249"
+    },
+    "micro_representatives": {
+      "path": "micro_representatives.tsv",
+      "semantic_role": "M",
+      "bytes": 625531,
+      "sha256": "4af5864472f88e5f65215c1ff5088ab08193113841d9ce09ea872fdd6ba28877"
+    },
+    "cover_sites": {
+      "path": "cover_sites.tsv",
+      "semantic_role": "ordered_F",
+      "bytes": 4560078,
+      "sha256": "6d2115abac144af8a3f1da30d2ea235f0ef8b6ec74a28450dee606027af81cef"
+    },
+    "cover_tree": {
+      "path": "cover_tree.cert",
+      "semantic_role": "proposed_complete_cover_stream",
+      "bytes": 9649387,
+      "sha256": "643180ce10a52ebaf5d7a1fe0c63b54c3c0b592fbe335bbd8ad59f9d3a32e207"
+    }
+  }
+}

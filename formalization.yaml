@@ -1,0 +1,155 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Erdős Problem 188: unit-step progressions in the plane"
+  description: >-
+    A Lean proof of the bounds 8 ≤ K* ≤ 42 for Erdős Problem 188, where K*
+    is the least k for which the plane can be colored red and blue with no
+    red pair at distance one and no blue k-term arithmetic progression with
+    unit step. The previously published bounds are 6 ≤ K* ≤ 6330, and Carson
+    Crocker independently and concurrently obtained 7 ≤ K* ≤ 60. Both bounds
+    are new to our knowledge. The lower bound uses a spectral argument over
+    the formalized inputs of OpenAI's proof that the plane is not
+    five-colorable; the upper bound is an explicit periodic disk coloring
+    with kernel-checked finite certificates.
+  authors:
+    - "Jacob Parish"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Jacob Parish"
+
+classification:
+  arxiv: ["math.CO", "math.MG"]
+  msc2020: ["05D10", "52C10"]
+
+sources:
+  - title: "Old and new problems and results in combinatorial number theory: van der Waerden's theorem and related topics"
+    authors: ["P. Erdős", "R. L. Graham"]
+    id: "L'Enseignement Mathématique (2) 25 (1979), 325–344"
+    type: "paper"
+    relationship: "formalizes"
+    note: >-
+      Source of the question, on pp. 330–331. The same question appears in
+      the 1980 monograph of the same title, pp. 14–15.
+  - title: "Erdős Problem #188"
+    authors: ["Thomas F. Bloom"]
+    id: "https://www.erdosproblems.com/188"
+    relationship: "background"
+    note: >-
+      Bloom's catalog entry supplies the problem number and the unit-step
+      formulation.
+  - title: "Formal Conjectures: ErdosProblems/188.lean"
+    authors: ["The Formal Conjectures Authors"]
+    id: "https://github.com/google-deepmind/formal-conjectures/blob/8adf5b7d199d83d7c69d2f89d0e7327362ead98a/FormalConjectures/ErdosProblems/188.lean"
+    relationship: "background"
+    note: >-
+      The definitions of Erdos188.s and Set.IsAPOfLengthWith in
+      Challenge.lean are copied verbatim from this file and its utility
+      module at the stated commit.
+  - title: "A Euclidean Ramsey result in the plane"
+    authors: ["Sergei Tsaturian"]
+    id: "https://doi.org/10.37236/7148"
+    type: "paper"
+    relationship: "background"
+    note: >-
+      Previous lower bound K* ≥ 6, improved here.
+  - title: "Improved bounds for lines and 1-separated sets in Euclidean Ramsey theory"
+    authors: ["Currier", "Mody", "Xie", "Zhang"]
+    id: "arXiv:2606.17194"
+    type: "paper"
+    relationship: "background"
+    note: >-
+      Previous upper bound K* ≤ 6330, improved here.
+  - title: "Erdős Problem #188: 7 ≤ k ≤ 60, with code and certificates"
+    authors: ["Carson Crocker"]
+    id: "https://doi.org/10.5281/zenodo.23405962"
+    type: "paper"
+    relationship: "background"
+    note: >-
+      Concurrent independent bounds 7 ≤ K* ≤ 60, first deposited on Zenodo on
+      7 October 2026 as https://doi.org/10.5281/zenodo.23151059. Computer-
+      assisted and unrefereed. Both bounds proved here are stronger, by
+      different arguments.
+  - title: "The Euclidean plane is not five-colorable"
+    authors: ["OpenAI"]
+    id: "https://github.com/openai/math"
+    type: "paper"
+    relationship: "adapts"
+    note: >-
+      Supplies the spectral rigidity theorem and invariant-mean inputs of the
+      lower bound. The 34 modules under OAI/ are ported from the lean/
+      directory at commit adc7f1241b42e322a6451854ab7e4b4c146bf78a.
+
+status:
+  scope: >-
+    Comparator checks two theorems against the formal-conjectures definition
+    of the admissible set: every admissible length is at least 8, and 42 is
+    admissible. The exact value of K* is not determined.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Quot.sound", "Classical.choice"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["claude-fable-5-1", "claude-opus-5-5"]
+      framework: "Claude Code"
+      tool_setup: "Lean 4.35.0-rc4, Mathlib, Lake, and the lean-lsp MCP server."
+      prompting_notes: >-
+        Human direction covered the target statement, the use of the
+        formal-conjectures statement and the vendored openai/math
+        formalization, and the publication layout. The two bounds were
+        formalized in separate developments, then ported to this toolchain
+        under the Erdos188 namespace and joined in FinalAssembly.lean.
+    - method: "agent"
+      models: ["gpt-6-astra", "gpt-5.6-sol"]
+      framework: "Codex"
+      tool_setup: "Lean 4, Mathlib, Lake, and Python."
+      prompting_notes: >-
+        Codex agents worked alongside the Claude agents, under human
+        direction, on the proofs, the upper-bound construction and its
+        certificates, and the Lean developments ported here.
+  notes: >-
+    Claude and OpenAI models produced the Lean formalization and the
+    certificate generators in Claude Code and Codex under human direction,
+    following proofs written up by Plasma AI.
+
+fidelity:
+  divergences: >-
+    No known divergence from the formal-conjectures statement, which is
+    copied verbatim. That statement colors ℂ and counts the points of the
+    progression, so the upper bound excludes blue progressions of 42 points
+    with unit step in every direction.
+
+review:
+  status: ""
+  reviewers: []
+  notes: >-
+    The full development, including the 1518 generated upper-bound modules,
+    builds on Lean v4.35.0-rc4, and both compared theorems depend only on
+    propext, Classical.choice, and Quot.sound. The generated modules are
+    regenerated byte for byte by scripts/regenerate.py, and the six data
+    files they are generated from are reproduced byte for byte from the two
+    orbit tables by scripts/construction/main.py. Comparator has not yet been
+    run.
+
+alignment:
+  namespace: "Erdos188"
+  statements:
+    - source: "Erdős–Graham unit-step progression question, lower bound"
+      lean: "Erdos188.lower_bound"
+      module: "Solution"
+      status: "proved"
+      note: >-
+        Every red/blue coloring of the plane with no red unit pair has a blue
+        seven-term unit-step progression.
+    - source: "Erdős–Graham unit-step progression question, upper bound"
+      lean: "Erdos188.upper_bound"
+      module: "Solution"
+      status: "proved"
+      note: >-
+        An explicit periodic disk coloring has no red unit pair and no blue
+        42-term unit-step progression.
+
+acknowledgements: "Mathlib, formal-conjectures, OpenAI's openai/math formalization, and the authors of the cited mathematical sources."

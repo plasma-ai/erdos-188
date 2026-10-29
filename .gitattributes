@@ -1,0 +1,5 @@
+data/k42/base.tsv filter=lfs diff=lfs merge=lfs -text
+data/k42/carriers.tsv filter=lfs diff=lfs merge=lfs -text
+data/k42/plugs.tsv filter=lfs diff=lfs merge=lfs -text
+data/k42/cover_sites.tsv filter=lfs diff=lfs merge=lfs -text
+data/k42/cover_tree.cert filter=lfs diff=lfs merge=lfs -text
